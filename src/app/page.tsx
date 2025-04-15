@@ -36,363 +36,75 @@ const initialMonsters: Monster[] = [
     {
         id: "1",
         name: "Goblin",
-        photo: "/goblin.png",
+        photo: "https://th.bing.com/th/id/R.6287a313888bdad6ef83b370c5fadea7?rik=8WG4WM%2b2uZ%2b%2bHQ&riu=http%3a%2f%2fimg05.deviantart.net%2f1c21%2fi%2f2014%2f210%2f7%2f2%2fgoblin_by_aaronflorento-d7srkrg.jpg&ehk=o5bYZPUgufr2yqOVoGZ8NRdEvSCZHCmxicTB6Nn7Xc8%3d&risl=&pid=ImgRaw&r=0",
         description: "A small, mischievous creature."
     },
     {
         id: "2",
         name: "Dragon",
-        photo: "/dragon.png",
+        photo: "https://i.etsystatic.com/40277972/r/il/802088/4606144863/il_fullxfull.4606144863_4vx9.jpg",
         description: "A large, fire-breathing reptile."
     },
   {
     id: "3",
     name: "Ogre",
-    photo: "/ogre.png",
+    photo: "https://i.pinimg.com/originals/35/d3/05/35d305e6cc776ef738ea8272ed68738e.jpg",
     description: "A big and ugly creature."
   },
   {
     id: "4",
     name: "Troll",
-    photo: "/troll.png",
+    photo: "https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2022/12/02/troll-2-netflix.jpg",
     description: "A very big and ugly creature."
   },
   {
     id: "5",
     name: "Sprite",
-    photo: "/sprite.png",
+    photo: "https://cdn.pixabay.com/photo/2023/03/06/16/59/sprite-7833913_1280.png",
     description: "A small fairy."
   },
   {
     id: "6",
     name: "Gorgon",
-    photo: "/gorgon.png",
+    photo: "https://as1.ftcdn.net/v2/jpg/05/68/92/90/1000_F_568929057_lNrA7Ur0jYkGiMmOeGqmBEaHzGWgHrFQ.jpg",
     description: "A snake-haired monster."
   },
   {
     id: "7",
     name: "Centaur",
-    photo: "/centaur.png",
+    photo: "https://i.pinimg.com/originals/76/e1/21/76e121c2774bf362edb348f562012302.jpg",
     description: "A half-man, half-horse creature."
   },
   {
     id: "8",
     name: "Harpy",
-    photo: "/harpy.png",
+    photo: "https://i.pinimg.com/736x/6f/46/e2/6f46e242927a223cda71af0a7542d299.jpg",
     description: "A bird-woman creature."
   },
   {
     id: "9",
     name: "Phoenix",
-    photo: "/phoenix.png",
+    photo: "https://i.etsystatic.com/39938216/r/il/4cd53b/4478579574/il_fullxfull.4478579574_fd3t.jpg",
     description: "A fire bird creature."
   },
   {
     id: "10",
     name: "Basilisk",
-    photo: "/basilisk.png",
+    photo: "https://cdna.artstation.com/p/assets/images/images/000/055/992/large/Katelyn-Malmsten-Basilisk.jpg?1399322477",
     description: "A snake creature."
   },
   {
     id: "11",
     name: "Hydra",
-    photo: "/hydra.png",
+    photo: "https://wallpaperaccess.com/full/169714.jpg",
     description: "A multi-headed serpent."
   },
   {
     id: "12",
     name: "Cerberus",
-    photo: "/cerberus.png",
+    photo: "https://i.pinimg.com/originals/37/5d/47/375d475d08d3808acff7b4436dbadc28.jpg",
     description: "A multi-headed dog."
-  },
-    {
-        id: "13",
-        name: "Minotaur",
-        photo: "/minotaur.png",
-        description: "A creature with the head of a bull and the body of a man."
-    },
-    {
-        id: "14",
-        name: "Siren",
-        photo: "/siren.png",
-        description: "A beautiful but dangerous creature that lures sailors with its enchanting voice."
-    },
-    {
-        id: "15",
-        name: "Cyclops",
-        photo: "/cyclops.png",
-        description: "A giant with a single eye in the middle of its forehead."
-    },
-    {
-        id: "16",
-        name: "Chimera",
-        photo: "/chimera.png",
-        description: "A fire-breathing monster with the head of a lion, a goat's body, and a serpent's tail."
-    },
-    {
-        id: "17",
-        name: "Griffin",
-        photo: "/griffin.png",
-        description: "A legendary creature with the body, tail, and back legs of a lion; the head and wings of an eagle; and an eagle's talons as its front feet."
-    },
-    {
-        id: "18",
-        name: "Hippogriff",
-        photo: "/hippogriff.png",
-        description: "A legendary creature with the front half of an eagle and the hind half of a horse."
-    },
-    {
-        id: "19",
-        name: "Kraken",
-        photo: "/kraken.png",
-        description: "A legendary sea monster of giant size and cephalopod appearance."
-    },
-    {
-        id: "20",
-        name: "Leviathan",
-        photo: "/leviathan.png",
-        description: "A sea monster referenced in the Bible."
-    },
-    {
-        id: "21",
-        name: "Roc",
-        photo: "/roc.png",
-        description: "A legendary enormous bird of prey."
-    },
-    {
-        id: "22",
-        name: "Thunderbird",
-        photo: "/thunderbird.png",
-        description: "A legendary creature in certain North American indigenous cultures' history and culture. It is considered a supernatural being of power and strength."
-    },
-    {
-      id: "23",
-      name: "Grendel",
-      photo: "/grendel.png",
-      description: "A monstrous creature from the epic poem Beowulf."
-  },
-  {
-      id: "24",
-      name: "Medusa",
-      photo: "/medusa.png",
-      description: "A Gorgon with snakes for hair whose gaze could turn men to stone."
-  },
-  {
-      id: "25",
-      name: "Banshee",
-      photo: "/banshee.png",
-      description: "A female spirit in Irish folklore whose wails foretell death."
-  },
-  {
-      id: "26",
-      name: "Yeti",
-      photo: "/yeti.png",
-      description: "A large, ape-like creature said to inhabit the Himalayan region."
-  },
-  {
-      id: "27",
-      name: "Vampire",
-      photo: "/vampire.png",
-      description: "A mythical being who subsists by feeding on the blood of the living."
-  },
-  {
-      id: "28",
-      name: "Werewolf",
-      photo: "/werewolf.png",
-      description: "A person who transforms into a wolf-like creature during a full moon."
-  },
-  {
-      id: "29",
-      name: "Zombie",
-      photo: "/zombie.png",
-      description: "A reanimated corpse, often depicted as feeding on human flesh."
-  },
-  {
-      id: "30",
-      name: "Mummy",
-      photo: "/mummy.png",
-      description: "A deceased human or animal whose body has been preserved."
-  },
-  {
-      id: "31",
-      name: "Ghoul",
-      photo: "/ghoul.png",
-      description: "A monstrous humanoid creature that feeds on corpses."
-  },
-  {
-      id: "32",
-      name: "Imp",
-      photo: "/imp.png",
-      description: "A small, mischievous demon or fairy."
-  },
-  {
-    id: "33",
-    name: "Salamander",
-    photo: "/salamander.png",
-    description: "A mythical creature resembling a lizard, believed to live in fire."
-  },
-  {
-    id: "34",
-    name: "Gargoyle",
-    photo: "/gargoyle.png",
-    description: "A grotesque carved human or animal face or figure projecting from the gutter of a building."
-  },
-  {
-    id: "35",
-    name: "Will-o'-the-Wisp",
-    photo: "/will-o-the-wisp.png",
-    description: "A mysterious light seen by travelers at night, especially over bogs."
-  },
-  {
-    id: "36",
-    name: "Baba Yaga",
-    photo: "/baba-yaga.png",
-    description: "A supernatural being (or one of a trio of sisters with the same name) who appears as a deformed and/or ferocious-looking old woman in Slavic folklore."
-  },
-  {
-    id: "37",
-    name: "Leshy",
-    photo: "/leshy.png",
-    description: "A tutelary deity of the forests in Slavic mythology."
-  },
-  {
-    id: "38",
-    name: "Domovoy",
-    photo: "/domovoy.png",
-    description: "A household spirit in Slavic folklore."
-  },
-  {
-    id: "39",
-    name: "Vodyanoy",
-    photo: "/vodyanoy.png",
-    description: "A male water spirit in Slavic mythology."
-  },
-  {
-    id: "40",
-    name: "Rusalka",
-    photo: "/rusalka.png",
-    description: "A female water spirit in Slavic mythology."
-  },
-    {
-        id: "41",
-        name: "Dryad",
-        photo: "/dryad.png",
-        description: "A tree nymph or tree spirit in Greek mythology."
-    },
-    {
-        id: "42",
-        name: "Satyr",
-        photo: "/satyr.png",
-        description: "A creature that is part man and part goat."
-    },
-    {
-        id: "43",
-        name: "Sphinx",
-        photo: "/sphinx.png",
-        description: "A mythical creature with the head of a human and the body of a lion."
-    },
-    {
-        id: "44",
-        name: "Bicorn",
-        photo: "/bicorn.png",
-        description: "A mythical creature similar to a unicorn, but with two horns."
-    },
-    {
-        id: "45",
-        name: "Questing Beast",
-        photo: "/questing-beast.png",
-        description: "A monster from Arthurian legend with the head and neck of a serpent, the body of a leopard, the haunches of a lion, and the feet of a hart."
-    },
-    {
-        id: "46",
-        name: "Kelpie",
-        photo: "/kelpie.png",
-        description: "A shape-shifting water spirit inhabiting the lochs and pools of Scotland."
-    },
-    {
-        id: "47",
-        name: "Manticore",
-        photo: "/manticore.png",
-        description: "A Persian legendary creature similar to the Egyptian sphinx. It has the body of a red lion, a human head with three rows of sharp teeth, and a trumpet-like voice."
-    },
-    {
-        id: "48",
-        name: "Pegasus",
-        photo: "/pegasus.png",
-        description: "One of the best known creatures in Greek mythology. He is a winged divine stallion usually depicted as pure white."
-    },
-    {
-        id: "49",
-        name: "Wyvern",
-        photo: "/wyvern.png",
-        description: "A dragon-like creature with two legs and a barbed tail."
-    },
-    {
-        id: "50",
-        name: "Amarok",
-        photo: "/amarok.png",
-        description: "A giant wolf in Inuit mythology, said to hunt anyone foolish enough to venture out alone at night."
-    },
-    {
-        id: "51",
-        name: "Unicorn",
-        photo: "/unicorn.png",
-        description: "A mythical creature usually depicted as a white horse with a single, pointed horn projecting from its forehead."
-    },
-    {
-        id: "52",
-        name: "Nymph",
-        photo: "/nymph.png",
-        description: "A mythological spirit of nature imagined as a beautiful maiden inhabiting rivers, woods, or other locations."
-    },
-    {
-        id: "53",
-        name: "Salamander",
-        photo: "/salamander.png",
-        description: "A mythical creature often depicted as a lizard-like animal that lives in fire or has an affinity with fire."
-    },
-    {
-        id: "54",
-        name: "Baku",
-        photo: "/baku.png",
-        description: "A Japanese supernatural being that devours nightmares."
-    },
-    {
-        id: "55",
-        name: "Grootslang",
-        photo: "/grootslang.png",
-        description: "A legendary creature from South African folklore, said to be a primordial being with the features of an elephant and a serpent."
-    },
-    {
-        id: "56",
-        name: "Wendigo",
-        photo: "/wendigo.png",
-        description: "A malevolent, cannibalistic spirit or creature from the folklore of the First Nations Algonquin people."
-    },
-    {
-        id: "57",
-        name: "Taniwha",
-        photo: "/taniwha.png",
-        description: "A supernatural being in Māori culture, often taking the form of a mythical sea creature or reptile."
-    },
-    {
-        id: "58",
-        name: "Ahuitzotl",
-        photo: "/ahuitzotl.png",
-        description: "A mythical creature in Aztec mythology, described as a dog-like creature with human-like hands, a monkey's body, and a long tail ending in a hand."
-    },
-    {
-        id: "59",
-        name: "Yacumama",
-        photo: "/yacumama.png",
-        description: "A legendary giant serpent said to inhabit the Amazon River basin."
-    },
-    {
-        id: "60",
-        name: "Tarasque",
-        photo: "/tarasque.png",
-        description: "A fearsome legendary dragon-like creature from French folklore, said to have terrorized the region of Tarascon."
-    }
+  }
 ];
 
 const PAGE_SIZE = 8;
