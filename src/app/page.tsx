@@ -413,6 +413,7 @@ export default function Home() {
     const [isSignUp, setIsSignUp] = useState(false);
     const [signUpOpen, setSignUpOpen] = useState(false);
   const [users, setUsers] = useState<{ username: string; password: string; }[]>([]);
+  const [signInDialogOpen, setSignInDialogOpen] = useState(false);
 
     const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
 
@@ -464,6 +465,7 @@ export default function Home() {
     if (user) {
       setLoggedIn(true);
       setLoginError(null);
+      setSignInDialogOpen(false); // Close the sign-in dialog
     } else {
       setLoginError('Invalid username or password');
       setUsername('');
@@ -502,21 +504,7 @@ export default function Home() {
                 <div className="flex gap-2 items-center">
                   {!loggedIn ? (
                       <>
-                        <Input
-                          type="text"
-                          placeholder="Username"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          className="mr-2"
-                        />
-                        <Input
-                          type="password"
-                          placeholder="Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="mr-2"
-                        />
-                        <Button size="sm" onClick={handleSignIn}>
+                        <Button size="sm" onClick={() => setSignInDialogOpen(true)}>
                           Sign In
                         </Button>
                         <Button size="sm" variant="secondary" onClick={() => setSignUpOpen(true)}>
@@ -701,6 +689,47 @@ export default function Home() {
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={handleSignUp}>Sign Up</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <AlertDialog open={signInDialogOpen} onOpenChange={setSignInDialogOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Sign In</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Enter your username and password to sign in.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="sign-in-name" className="text-right">
+                    Username
+                  </Label>
+                  <Input
+                    id="sign-in-name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="sign-in-password" className="text-right">
+                    Password
+                  </Label>
+                  <Input
+                    type="password"
+                    id="sign-in-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="col-span-3"
+                  />
+                </div>
+                {loginError && <p className="text-red-500">{loginError}</p>}
+              </div>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleSignIn}>Sign In</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
