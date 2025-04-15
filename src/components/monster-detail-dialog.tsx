@@ -8,6 +8,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface MonsterDetailDialogProps {
     open: boolean;
@@ -36,6 +37,7 @@ export function MonsterDetailDialog({
                         <AlertDialogDescription>{monster.description}</AlertDialogDescription>
                     </CardContent>
                 </Card>
+                <Button onClick={() => onOpenChange(false)}>Exit</Button>
             </AlertDialogContent>
         </AlertDialog>
     );
