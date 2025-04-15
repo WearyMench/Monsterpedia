@@ -9,6 +9,7 @@ import { MonsterDetailDialog } from "@/components/monster-detail-dialog";
 import { useState, useEffect } from 'react';
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface Monster {
     id: string;
@@ -95,10 +96,13 @@ export default function Home() {
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Monsterpedia</h1>
-                <Button onClick={() => setAddMonsterOpen(true)}>
-                    <Plus className="mr-2 h-4 w-4" />
-                    Add Monster
-                </Button>
+                <div className="flex gap-2 items-center">
+                  <Button onClick={() => setAddMonsterOpen(true)}>
+                      <Plus className="mr-2 h-4 w-4" />
+                      Add Monster
+                  </Button>
+                  <ThemeToggle />
+                </div>
             </div>
 
             {/* Search Input */}
@@ -199,3 +203,4 @@ export default function Home() {
         </div>
     );
 }
+
