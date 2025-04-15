@@ -8,36 +8,39 @@ import { DeleteMonsterDialog } from "@/components/delete-monster-dialog";
 import { MonsterDetailDialog } from "@/components/monster-detail-dialog";
 import { useState, useEffect } from 'react';
 import { Plus } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface Monster {
-  id: string;
-  name: string;
-  photo: string;
-  description: string;
+    id: string;
+    name: string;
+    photo: string;
+    description: string;
 }
 
 const initialMonsters: Monster[] = [
-  {
-    id: "1",
-    name: "Goblin",
-    photo: "https://picsum.photos/200/300",
-    description: "A small, mischievous creature."
-  },
-  {
-    id: "2",
-    name: "Dragon",
-    photo: "https://picsum.photos/200/300",
-    description: "A large, fire-breathing reptile."
-  }
+    {
+        id: "1",
+        name: "Goblin",
+        photo: "https://picsum.photos/200/300",
+        description: "A small, mischievous creature."
+    },
+    {
+        id: "2",
+        name: "Dragon",
+        photo: "https://picsum.photos/200/300",
+        description: "A large, fire-breathing reptile."
+    }
 ];
 
 export default function Home() {
-  const [monsters, setMonsters] = useState<Monster[]>([]);
-  const [addMonsterOpen, setAddMonsterOpen] = useState(false);
-  const [selectedMonster, setSelectedMonster] = useState<Monster | null>(null);
-  const [editMonsterOpen, setEditMonsterOpen] = useState(false);
-  const [deleteMonsterOpen, setDeleteMonsterOpen] = useState(false);
+    const [monsters, setMonsters] = useState<Monster[]>([]);
+    const [addMonsterOpen, setAddMonsterOpen] = useState(false);
+    const [selectedMonster, setSelectedMonster] = useState<Monster | null>(null);
+    const [editMonsterOpen, setEditMonsterOpen] = useState(false);
+    const [deleteMonsterOpen, setDeleteMonsterOpen] = useState(false);
     const [monsterDetailOpen, setMonsterDetailOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredMonsters, setFilteredMonsters] = useState<Monster[]>([]);
 
 
     useEffect(() => {
@@ -56,117 +59,135 @@ export default function Home() {
         localStorage.setItem('monsters', JSON.stringify(monsters));
     }, [monsters]);
 
+    useEffect(() => {
+        // Filter monsters based on search term
+        const results = monsters.filter(monster =>
+            monster.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredMonsters(results);
+    }, [searchTerm, monsters]);
 
-  const handleAddMonster = (newMonster: Omit<Monster, 'id'>) => {
-    const monsterToAdd = { ...newMonster, id: crypto.randomUUID() };
-    setMonsters([...monsters, monsterToAdd]);
-    setAddMonsterOpen(false);
-  };
 
-  const handleEditMonster = (updatedMonster: Monster) => {
-    setMonsters(
-      monsters.map((monster) =>
-        monster.id === updatedMonster.id ? updatedMonster : monster
-      )
-    );
-    setEditMonsterOpen(false);
-  };
+    const handleAddMonster = (newMonster: Omit<Monster, 'id'>) => {
+        const monsterToAdd = { ...newMonster, id: crypto.randomUUID() };
+        setMonsters([...monsters, monsterToAdd]);
+        setAddMonsterOpen(false);
+    };
 
-  const handleDeleteMonster = () => {
-    if (selectedMonster) {
-      setMonsters(monsters.filter((monster) => monster.id !== selectedMonster.id));
-      setDeleteMonsterOpen(false);
-      setSelectedMonster(null);
-    }
-  };
+    const handleEditMonster = (updatedMonster: Monster) => {
+        setMonsters(
+            monsters.map((monster) =>
+                monster.id === updatedMonster.id ? updatedMonster : monster
+            )
+        );
+        setEditMonsterOpen(false);
+    };
 
-  return (
-    <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Monsterpedia</h1>
-        <Button onClick={() => setAddMonsterOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Monster
-        </Button>
-      </div>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {monsters.map((monster) => (
-          <Card
-            key={monster.id}
-            className="hover:shadow-md transition-shadow duration-200"
-          >
-            <CardHeader>
-              <CardTitle>{monster.name}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center">
-              <img
-                src={monster.photo}
-                alt={monster.name}
-                className="rounded-md mb-2 w-full h-48 object-cover"
-              />
-              <CardDescription>{monster.description}</CardDescription>
-            </CardContent>
-            <div className="flex justify-between items-center p-4">
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => {
-                  setSelectedMonster(monster);
-                  setMonsterDetailOpen(true);
-                }}
-              >
-                Details
-              </Button>
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setSelectedMonster(monster);
-                    setEditMonsterOpen(true);
-                  }}
-                  className="bg-accent text-accent-foreground hover:bg-accent/80"
-                >
-                  Edit
+    const handleDeleteMonster = () => {
+        if (selectedMonster) {
+            setMonsters(monsters.filter((monster) => monster.id !== selectedMonster.id));
+            setDeleteMonsterOpen(false);
+            setSelectedMonster(null);
+        }
+    };
+
+    return (
+        <div className="container mx-auto p-4">
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold">Monsterpedia</h1>
+                <Button onClick={() => setAddMonsterOpen(true)}>
+                    <Plus className="mr-2 h-4 w-4" />
+                    Add Monster
                 </Button>
-                <Button
-                  size="sm"
-                  variant="destructive"
-                  onClick={() => {
-                    setSelectedMonster(monster);
-                    setDeleteMonsterOpen(true);
-                  }}
-                >
-                  Delete
-                </Button>
-              </div>
             </div>
-          </Card>
-        ))}
-      </div>
 
-      <AddMonsterDialog
-        open={addMonsterOpen}
-        onOpenChange={setAddMonsterOpen}
-        onAddMonster={handleAddMonster}
-      />
+            {/* Search Input */}
+            <Input
+                type="text"
+                placeholder="Search monsters..."
+                className="mb-4"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-      {selectedMonster && (
-        <EditMonsterDialog
-          open={editMonsterOpen}
-          onOpenChange={setEditMonsterOpen}
-          monster={selectedMonster}
-          onEditMonster={handleEditMonster}
-        />
-      )}
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {filteredMonsters.map((monster) => (
+                    <Card
+                        key={monster.id}
+                        className="hover:shadow-md transition-shadow duration-200"
+                    >
+                        <CardHeader>
+                            <CardTitle>{monster.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex flex-col items-center">
+                            <img
+                                src={monster.photo}
+                                alt={monster.name}
+                                className="rounded-md mb-2 w-full h-48 object-cover"
+                            />
+                            <CardDescription>{monster.description}</CardDescription>
+                        </CardContent>
+                        <div className="flex justify-between items-center p-4">
+                            <Button
+                                size="sm"
+                                variant="secondary"
+                                onClick={() => {
+                                    setSelectedMonster(monster);
+                                    setMonsterDetailOpen(true);
+                                }}
+                            >
+                                Details
+                            </Button>
+                            <div className="flex gap-2">
+                                <Button
+                                    size="sm"
+                                    onClick={() => {
+                                        setSelectedMonster(monster);
+                                        setEditMonsterOpen(true);
+                                    }}
+                                    className="bg-accent text-accent-foreground hover:bg-accent/80"
+                                >
+                                    Edit
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    variant="destructive"
+                                    onClick={() => {
+                                        setSelectedMonster(monster);
+                                        setDeleteMonsterOpen(true);
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        </div>
+                    </Card>
+                ))}
+            </div>
 
-      {selectedMonster && (
-        <DeleteMonsterDialog
-          open={deleteMonsterOpen}
-          onOpenChange={setDeleteMonsterOpen}
-          monsterName={selectedMonster.name}
-          onDeleteMonster={handleDeleteMonster}
-        />
-      )}
+            <AddMonsterDialog
+                open={addMonsterOpen}
+                onOpenChange={setAddMonsterOpen}
+                onAddMonster={handleAddMonster}
+            />
+
+            {selectedMonster && (
+                <EditMonsterDialog
+                    open={editMonsterOpen}
+                    onOpenChange={setEditMonsterOpen}
+                    monster={selectedMonster}
+                    onEditMonster={handleEditMonster}
+                />
+            )}
+
+            {selectedMonster && (
+                <DeleteMonsterDialog
+                    open={deleteMonsterOpen}
+                    onOpenChange={setDeleteMonsterOpen}
+                    monsterName={selectedMonster.name}
+                    onDeleteMonster={handleDeleteMonster}
+                />
+            )}
 
             {selectedMonster && (
                 <MonsterDetailDialog
@@ -175,7 +196,6 @@ export default function Home() {
                     monster={selectedMonster}
                 />
             )}
-    </div>
-  );
+        </div>
+    );
 }
-
