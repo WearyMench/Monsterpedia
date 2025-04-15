@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -154,7 +153,115 @@ const initialMonsters: Monster[] = [
         name: "Thunderbird",
         photo: "https://picsum.photos/200/300",
         description: "A legendary creature in certain North American indigenous cultures' history and culture. It is considered a supernatural being of power and strength."
-    }
+    },
+    {
+      id: "23",
+      name: "Grendel",
+      photo: "https://picsum.photos/200/300",
+      description: "A monstrous creature from the epic poem Beowulf."
+  },
+  {
+      id: "24",
+      name: "Medusa",
+      photo: "https://picsum.photos/200/300",
+      description: "A Gorgon with snakes for hair whose gaze could turn men to stone."
+  },
+  {
+      id: "25",
+      name: "Banshee",
+      photo: "https://picsum.photos/200/300",
+      description: "A female spirit in Irish folklore whose wails foretell death."
+  },
+  {
+      id: "26",
+      name: "Yeti",
+      photo: "https://picsum.photos/200/300",
+      description: "A large, ape-like creature said to inhabit the Himalayan region."
+  },
+  {
+      id: "27",
+      name: "Vampire",
+      photo: "https://picsum.photos/200/300",
+      description: "A mythical being who subsists by feeding on the blood of the living."
+  },
+  {
+      id: "28",
+      name: "Werewolf",
+      photo: "https://picsum.photos/200/300",
+      description: "A person who transforms into a wolf-like creature during a full moon."
+  },
+  {
+      id: "29",
+      name: "Zombie",
+      photo: "https://picsum.photos/200/300",
+      description: "A reanimated corpse, often depicted as feeding on human flesh."
+  },
+  {
+      id: "30",
+      name: "Mummy",
+      photo: "https://picsum.photos/200/300",
+      description: "A deceased human or animal whose body has been preserved."
+  },
+  {
+      id: "31",
+      name: "Ghoul",
+      photo: "https://picsum.photos/200/300",
+      description: "A monstrous humanoid creature that feeds on corpses."
+  },
+  {
+      id: "32",
+      name: "Imp",
+      photo: "https://picsum.photos/200/300",
+      description: "A small, mischievous demon or fairy."
+  },
+  {
+    id: "33",
+    name: "Salamander",
+    photo: "https://picsum.photos/200/300",
+    description: "A mythical creature resembling a lizard, believed to live in fire."
+  },
+  {
+    id: "34",
+    name: "Gargoyle",
+    photo: "https://picsum.photos/200/300",
+    description: "A grotesque carved human or animal face or figure projecting from the gutter of a building."
+  },
+  {
+    id: "35",
+    name: "Will-o'-the-Wisp",
+    photo: "https://picsum.photos/200/300",
+    description: "A mysterious light seen by travelers at night, especially over bogs."
+  },
+  {
+    id: "36",
+    name: "Baba Yaga",
+    photo: "https://picsum.photos/200/300",
+    description: "A supernatural being (or one of a trio of sisters with the same name) who appears as a deformed and/or ferocious-looking old woman in Slavic folklore."
+  },
+  {
+    id: "37",
+    name: "Leshy",
+    photo: "https://picsum.photos/200/300",
+    description: "A tutelary deity of the forests in Slavic mythology."
+  },
+  {
+    id: "38",
+    name: "Domovoy",
+    photo: "https://picsum.photos/200/300",
+    description: "A household spirit in Slavic folklore."
+  },
+  {
+    id: "39",
+    name: "Vodyanoy",
+    photo: "https://picsum.photos/200/300",
+    description: "A male water spirit in Slavic mythology."
+  },
+  {
+    id: "40",
+    name: "Rusalka",
+    photo: "https://picsum.photos/200/300",
+    description: "A female water spirit in Slavic mythology."
+  }
 ];
 
 const PAGE_SIZE = 8;
@@ -373,5 +480,3 @@ export default function Home() {
         </div>
     );
 }
-
-    
