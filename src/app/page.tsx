@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,12 +11,15 @@ import { useState, useEffect } from 'react';
 import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SignInButton } from "@/components/sign-in-button";
+import { useSession } from "next-auth/react";
 
 interface Monster {
     id: string;
     name: string;
     photo: string;
     description: string;
+    createdBy?: string;
 }
 
 const initialMonsters: Monster[] = [
@@ -165,6 +169,7 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredMonsters, setFilteredMonsters] = useState<Monster[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const { data: session } = useSession();
 
     const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
 
@@ -205,7 +210,7 @@ export default function Home() {
 
 
     const handleAddMonster = (newMonster: Omit<Monster, 'id'>) => {
-        const monsterToAdd = { ...newMonster, id: crypto.randomUUID() };
+        const monsterToAdd = { ...newMonster, id: crypto.randomUUID(), createdBy: session?.user?.name };
         setMonsters([...monsters, monsterToAdd]);
         setAddMonsterOpen(false);
     };
@@ -232,11 +237,14 @@ export default function Home() {
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Monsterpedia</h1>
                 <div className="flex gap-2 items-center">
-                  <Button onClick={() => setAddMonsterOpen(true)}>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Add Monster
-                  </Button>
-                  <ThemeToggle />
+                    <SignInButton />
+                    {session && (
+                        <Button onClick={() => setAddMonsterOpen(true)}>
+                            <Plus className="mr-2 h-4 w-4" />
+                            Add Monster
+                        </Button>
+                    )}
+                    <ThemeToggle />
                 </div>
             </div>
 
@@ -278,26 +286,30 @@ export default function Home() {
                                 Details
                             </Button>
                             <div className="flex gap-2">
-                                <Button
-                                    size="sm"
-                                    onClick={() => {
-                                        setSelectedMonster(monster);
-                                        setEditMonsterOpen(true);
-                                    }}
-                                    className="bg-accent text-accent-foreground hover:bg-accent/80"
-                                >
-                                    Edit
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    variant="destructive"
-                                    onClick={() => {
-                                        setSelectedMonster(monster);
-                                        setDeleteMonsterOpen(true);
-                                    }}
-                                >
-                                    Delete
-                                </Button>
+                                {session && (
+                                    <>
+                                        <Button
+                                            size="sm"
+                                            onClick={() => {
+                                                setSelectedMonster(monster);
+                                                setEditMonsterOpen(true);
+                                            }}
+                                            className="bg-accent text-accent-foreground hover:bg-accent/80"
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            size="sm"
+                                            variant="destructive"
+                                            onClick={() => {
+                                                setSelectedMonster(monster);
+                                                setDeleteMonsterOpen(true);
+                                            }}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </Card>
@@ -361,3 +373,5 @@ export default function Home() {
         </div>
     );
 }
+
+    

@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -14,7 +15,7 @@ import { X } from "lucide-react";
 interface MonsterDetailDialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    monster: { id: string; name: string; photo: string; description: string };
+    monster: { id: string; name: string; photo: string; description: string; createdBy?: string };
 }
 
 export function MonsterDetailDialog({
@@ -45,6 +46,11 @@ export function MonsterDetailDialog({
                             className="rounded-md mb-4 w-full h-48 object-cover"
                         />
                         <AlertDialogDescription>{monster.description}</AlertDialogDescription>
+                        {monster.createdBy && (
+                            <p className="text-sm text-muted-foreground mt-2">
+                                Created by: {monster.createdBy}
+                            </p>
+                        )}
                     </CardContent>
                 </Card>
             </AlertDialogContent>
@@ -52,3 +58,4 @@ export function MonsterDetailDialog({
     );
 }
 
+    
