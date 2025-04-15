@@ -412,6 +412,7 @@ export default function Home() {
     const [loginError, setLoginError] = useState<string | null>(null);
     const [isSignUp, setIsSignUp] = useState(false);
     const [signUpOpen, setSignUpOpen] = useState(false);
+  const [users, setUsers] = useState<{ username: string; password: string; }[]>([]);
 
     const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
 
@@ -459,7 +460,8 @@ export default function Home() {
     };
   
   const handleSignIn = () => {
-    if (username === 'user' && password === 'password') {
+    const user = users.find((u) => u.username === username && u.password === password);
+    if (user) {
       setLoggedIn(true);
       setLoginError(null);
     } else {
@@ -476,9 +478,15 @@ export default function Home() {
   };
 
   const handleSignUp = () => {
-    // Placeholder for sign-up logic. In a real app, you'd send this data to a server.
-    if (username && password) {
-      // For this example, just sign them in automatically
+    // Check if the username already exists
+    const userExists = users.some((u) => u.username === username);
+    if (userExists) {
+      setLoginError('Username already exists. Please sign in.');
+      setIsSignUp(false);
+      setSignUpOpen(false); // Close the sign-up dialog
+    } else if (username && password) {
+      // Add the new user to the users array
+      setUsers([...users, { username, password }]);
       setLoggedIn(true);
       setLoginError(null);
       setSignUpOpen(false); // Close the sign-up dialog
@@ -688,6 +696,7 @@ export default function Home() {
                     className="col-span-3"
                   />
                 </div>
+                {loginError && <p className="text-red-500">{loginError}</p>}
               </div>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
