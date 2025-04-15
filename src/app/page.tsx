@@ -90,7 +90,67 @@ const initialMonsters: Monster[] = [
     name: "Cerberus",
     photo: "https://picsum.photos/200/300",
     description: "A multi-headed dog."
-  }
+  },
+    {
+        id: "13",
+        name: "Minotaur",
+        photo: "https://picsum.photos/200/300",
+        description: "A creature with the head of a bull and the body of a man."
+    },
+    {
+        id: "14",
+        name: "Siren",
+        photo: "https://picsum.photos/200/300",
+        description: "A beautiful but dangerous creature that lures sailors with its enchanting voice."
+    },
+    {
+        id: "15",
+        name: "Cyclops",
+        photo: "https://picsum.photos/200/300",
+        description: "A giant with a single eye in the middle of its forehead."
+    },
+    {
+        id: "16",
+        name: "Chimera",
+        photo: "https://picsum.photos/200/300",
+        description: "A fire-breathing monster with the head of a lion, a goat's body, and a serpent's tail."
+    },
+    {
+        id: "17",
+        name: "Griffin",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary creature with the body, tail, and back legs of a lion; the head and wings of an eagle; and an eagle's talons as its front feet."
+    },
+    {
+        id: "18",
+        name: "Hippogriff",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary creature with the front half of an eagle and the hind half of a horse."
+    },
+    {
+        id: "19",
+        name: "Kraken",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary sea monster of giant size and cephalopod appearance."
+    },
+    {
+        id: "20",
+        name: "Leviathan",
+        photo: "https://picsum.photos/200/300",
+        description: "A sea monster referenced in the Bible."
+    },
+    {
+        id: "21",
+        name: "Roc",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary enormous bird of prey."
+    },
+    {
+        id: "22",
+        name: "Thunderbird",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary creature in certain North American indigenous cultures' history and culture. It is considered a supernatural being of power and strength."
+    }
 ];
 
 const PAGE_SIZE = 8;
