@@ -11,7 +11,6 @@ import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SignInButton } from "@/components/sign-in-button";
-import { useSession } from "next-auth/react";
 
 interface Monster {
     id: string;
@@ -321,6 +320,66 @@ const initialMonsters: Monster[] = [
         name: "Amarok",
         photo: "https://picsum.photos/200/300",
         description: "A giant wolf in Inuit mythology, said to hunt anyone foolish enough to venture out alone at night."
+    },
+    {
+        id: "51",
+        name: "Unicorn",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythical creature usually depicted as a white horse with a single, pointed horn projecting from its forehead."
+    },
+    {
+        id: "52",
+        name: "Nymph",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythological spirit of nature imagined as a beautiful maiden inhabiting rivers, woods, or other locations."
+    },
+    {
+        id: "53",
+        name: "Salamander",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythical creature often depicted as a lizard-like animal that lives in fire or has an affinity with fire."
+    },
+    {
+        id: "54",
+        name: "Baku",
+        photo: "https://picsum.photos/200/300",
+        description: "A Japanese supernatural being that devours nightmares."
+    },
+    {
+        id: "55",
+        name: "Grootslang",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary creature from South African folklore, said to be a primordial being with the features of an elephant and a serpent."
+    },
+    {
+        id: "56",
+        name: "Wendigo",
+        photo: "https://picsum.photos/200/300",
+        description: "A malevolent, cannibalistic spirit or creature from the folklore of the First Nations Algonquin people."
+    },
+    {
+        id: "57",
+        name: "Taniwha",
+        photo: "https://picsum.photos/200/300",
+        description: "A supernatural being in Māori culture, often taking the form of a mythical sea creature or reptile."
+    },
+    {
+        id: "58",
+        name: "Ahuitzotl",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythical creature in Aztec mythology, described as a dog-like creature with human-like hands, a monkey's body, and a long tail ending in a hand."
+    },
+    {
+        id: "59",
+        name: "Yacumama",
+        photo: "https://picsum.photos/200/300",
+        description: "A legendary giant serpent said to inhabit the Amazon River basin."
+    },
+    {
+        id: "60",
+        name: "Tarasque",
+        photo: "https://picsum.photos/200/300",
+        description: "A fearsome legendary dragon-like creature from French folklore, said to have terrorized the region of Tarascon."
     }
 ];
 
@@ -336,7 +395,11 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredMonsters, setFilteredMonsters] = useState<Monster[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const { data: session } = useSession();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
+
 
     const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
 
@@ -361,7 +424,7 @@ export default function Home() {
 
 
     const handleAddMonster = (newMonster: Omit<Monster, 'id'>) => {
-        const monsterToAdd = { ...newMonster, id: crypto.randomUUID(), createdBy: session?.user?.name };
+        const monsterToAdd = { ...newMonster, id: crypto.randomUUID(), createdBy: username };
         setMonsters([...monsters, monsterToAdd]);
         setAddMonsterOpen(false);
     };
@@ -369,7 +432,7 @@ export default function Home() {
     const handleEditMonster = (updatedMonster: Monster) => {
         setMonsters(
             monsters.map((monster) =>
-                monster.id === updatedMonster.id ? updatedMonster : monster
+                monster.id === updatedMonster.id ? { ...updatedMonster, createdBy: username } : monster
             )
         );
         setEditMonsterOpen(false);
@@ -382,19 +445,63 @@ export default function Home() {
             setSelectedMonster(null);
         }
     };
+  
+  const handleSignIn = () => {
+    if (username === 'user' && password === 'password') {
+      setLoggedIn(true);
+      setLoginError(null);
+    } else {
+      setLoginError('Invalid username or password');
+      setUsername('');
+      setPassword('');
+    }
+  };
+
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    setUsername('');
+    setPassword('');
+  };
 
     return (
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Monsterpedia</h1>
                 <div className="flex gap-2 items-center">
-                    <SignInButton />
-                    {session && (
+                  {!loggedIn ? (
+                      <>
+                        <Input
+                          type="text"
+                          placeholder="Username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          className="mr-2"
+                        />
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className="mr-2"
+                        />
+                        <Button size="sm" onClick={handleSignIn}>
+                          Sign In
+                        </Button>
+                        {loginError && <p className="text-red-500">{loginError}</p>}
+                      </>
+                    ) : (
+                      <>
+                        <span>Welcome, {username}</span>
+                        <Button size="sm" onClick={handleSignOut}>
+                          Sign Out
+                        </Button>
                         <Button onClick={() => setAddMonsterOpen(true)}>
                             <Plus className="mr-2 h-4 w-4" />
                             Add Monster
                         </Button>
+                      </>
                     )}
+                    
                     <ThemeToggle />
                 </div>
             </div>
@@ -437,7 +544,7 @@ export default function Home() {
                                 Details
                             </Button>
                             <div className="flex gap-2">
-                                {session && (
+                                {loggedIn && (
                                     <>
                                         <Button
                                             size="sm"

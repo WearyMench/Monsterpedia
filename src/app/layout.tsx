@@ -3,7 +3,6 @@
 import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import { SessionProvider } from "next-auth/react";
 import React from "react";
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 
@@ -19,6 +18,12 @@ const geistMono = Geist_Mono({
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Session } from "next-auth";
+import { metadata } from './metadata';
+
+// export const metadata: Metadata = {
+//   title: 'Monsterpedia',
+//   description: 'A monster encyclopedia app',
+// };
 
 export default function RootLayout({
   children,
@@ -34,9 +39,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-          <SessionProvider>
-            {children}
-          </SessionProvider>
+          {children}
         </ClientThemeProvider>
       </body>
     </html>
@@ -62,5 +65,4 @@ function ClientThemeProvider({ children }: { children: React.ReactNode }) {
         </NextThemesProvider>
     );
 }
-
 
