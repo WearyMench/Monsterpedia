@@ -1,4 +1,4 @@
-{"use client";
+"use client";
 
 import {
     AlertDialog,
@@ -51,3 +51,4 @@ export function MonsterDetailDialog({
         </AlertDialog>
     );
 }
+
