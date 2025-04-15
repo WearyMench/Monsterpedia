@@ -261,13 +261,73 @@ const initialMonsters: Monster[] = [
     name: "Rusalka",
     photo: "https://picsum.photos/200/300",
     description: "A female water spirit in Slavic mythology."
-  }
+  },
+    {
+        id: "41",
+        name: "Dryad",
+        photo: "https://picsum.photos/200/300",
+        description: "A tree nymph or tree spirit in Greek mythology."
+    },
+    {
+        id: "42",
+        name: "Satyr",
+        photo: "https://picsum.photos/200/300",
+        description: "A creature that is part man and part goat."
+    },
+    {
+        id: "43",
+        name: "Sphinx",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythical creature with the head of a human and the body of a lion."
+    },
+    {
+        id: "44",
+        name: "Bicorn",
+        photo: "https://picsum.photos/200/300",
+        description: "A mythical creature similar to a unicorn, but with two horns."
+    },
+    {
+        id: "45",
+        name: "Questing Beast",
+        photo: "https://picsum.photos/200/300",
+        description: "A monster from Arthurian legend with the head and neck of a serpent, the body of a leopard, the haunches of a lion, and the feet of a hart."
+    },
+    {
+        id: "46",
+        name: "Kelpie",
+        photo: "https://picsum.photos/200/300",
+        description: "A shape-shifting water spirit inhabiting the lochs and pools of Scotland."
+    },
+    {
+        id: "47",
+        name: "Manticore",
+        photo: "https://picsum.photos/200/300",
+        description: "A Persian legendary creature similar to the Egyptian sphinx. It has the body of a red lion, a human head with three rows of sharp teeth, and a trumpet-like voice."
+    },
+    {
+        id: "48",
+        name: "Pegasus",
+        photo: "https://picsum.photos/200/300",
+        description: "One of the best known creatures in Greek mythology. He is a winged divine stallion usually depicted as pure white."
+    },
+    {
+        id: "49",
+        name: "Wyvern",
+        photo: "https://picsum.photos/200/300",
+        description: "A dragon-like creature with two legs and a barbed tail."
+    },
+    {
+        id: "50",
+        name: "Amarok",
+        photo: "https://picsum.photos/200/300",
+        description: "A giant wolf in Inuit mythology, said to hunt anyone foolish enough to venture out alone at night."
+    }
 ];
 
 const PAGE_SIZE = 8;
 
 export default function Home() {
-    const [monsters, setMonsters] = useState<Monster[]>([]);
+    const [monsters, setMonsters] = useState<Monster[]>(initialMonsters);
     const [addMonsterOpen, setAddMonsterOpen] = useState(false);
     const [selectedMonster, setSelectedMonster] = useState<Monster | null>(null);
     const [editMonsterOpen, setEditMonsterOpen] = useState(false);
@@ -289,22 +349,6 @@ export default function Home() {
         currentPage * PAGE_SIZE
     );
 
-
-    useEffect(() => {
-        // Load initial monsters from local storage or initial data
-        const storedMonsters = localStorage.getItem('monsters');
-        if (storedMonsters) {
-            setMonsters(JSON.parse(storedMonsters));
-        } else {
-            setMonsters(initialMonsters);
-            localStorage.setItem('monsters', JSON.stringify(initialMonsters));
-        }
-    }, []);
-
-    useEffect(() => {
-        // Save monsters to local storage whenever the list changes
-        localStorage.setItem('monsters', JSON.stringify(monsters));
-    }, [monsters]);
 
     useEffect(() => {
         // Filter monsters based on search term
