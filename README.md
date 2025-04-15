@@ -7,7 +7,7 @@ Monsterpedia is a web application built with Next.js that allows users to manage
 ## Features
 
 *   **Monster List:** View a list of all monsters with their names and images.
-*   **Monster Details:** Click on a monster to view detailed information, including its name, image, type, attack, defense, and HP.
+*   **Monster Details:** Click on a monster to view detailed information.
 *   **Add Monster:** Add new monsters to the list with a form to input all necessary details.
 *   **Edit Monster:** Modify existing monster information using a pre-filled form.
 *   **Delete Monster:** Remove monsters from the list.
@@ -35,7 +35,3 @@ The application follows a modern and clean design with the following style guide
 *   **Secondary Color:** `#f3f4f6` (Light Gray)
 *   **Font:** System Default
 *   **Component Library:** Shadcn/ui
-
-## Installation and Setup
-
-*(To be added if you want to provide instructions for running the app locally)*
