@@ -4,9 +4,25 @@
 import { Button } from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast"; // Import useToast hook
 
 export function SignInButton() {
   const { data: session } = useSession();
+  const { toast } = useToast(); // Get the toast function
+
+  const handleSignIn = async () => {
+    try {
+      await signIn("google");
+    } catch (error: any) {
+      console.error("Sign-in error:", error);
+      toast({
+        variant: "destructive",
+        title: "Sign-in failed",
+        description:
+          error.message || "An error occurred while trying to sign in.",
+      });
+    }
+  };
 
   if (session) {
     return (
@@ -24,10 +40,8 @@ export function SignInButton() {
   }
 
   return (
-    <Button size="sm" onClick={() => signIn("google")}>
+    <Button size="sm" onClick={handleSignIn}>
       Sign In with Google
     </Button>
   );
 }
-
-    
