@@ -10,7 +10,18 @@ import { useState, useEffect } from 'react';
 import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { SignInButton } from "@/components/sign-in-button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
 
 interface Monster {
     id: string;
@@ -395,11 +406,12 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredMonsters, setFilteredMonsters] = useState<Monster[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [loginError, setLoginError] = useState<string | null>(null);
-
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [loginError, setLoginError] = useState<string | null>(null);
+    const [isSignUp, setIsSignUp] = useState(false);
+    const [signUpOpen, setSignUpOpen] = useState(false);
 
     const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
 
@@ -463,6 +475,18 @@ export default function Home() {
     setPassword('');
   };
 
+  const handleSignUp = () => {
+    // Placeholder for sign-up logic. In a real app, you'd send this data to a server.
+    if (username && password) {
+      // For this example, just sign them in automatically
+      setLoggedIn(true);
+      setLoginError(null);
+      setSignUpOpen(false); // Close the sign-up dialog
+    } else {
+      setLoginError('Username and password are required');
+    }
+  };
+
     return (
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-4">
@@ -486,6 +510,9 @@ export default function Home() {
                         />
                         <Button size="sm" onClick={handleSignIn}>
                           Sign In
+                        </Button>
+                        <Button size="sm" variant="secondary" onClick={() => setSignUpOpen(true)}>
+                            Sign Up
                         </Button>
                         {loginError && <p className="text-red-500">{loginError}</p>}
                       </>
@@ -628,6 +655,46 @@ export default function Home() {
                     monster={selectedMonster}
                 />
             )}
+
+          <AlertDialog open={signUpOpen} onOpenChange={setSignUpOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Sign Up</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Enter a username and password to create an account.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="sign-up-name" className="text-right">
+                    Username
+                  </Label>
+                  <Input
+                    id="sign-up-name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="sign-up-password" className="text-right">
+                    Password
+                  </Label>
+                  <Input
+                    type="password"
+                    id="sign-up-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleSignUp}>Sign Up</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
     );
 }
