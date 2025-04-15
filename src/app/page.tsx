@@ -7,7 +7,7 @@ import { EditMonsterDialog } from "@/components/edit-monster-dialog";
 import { DeleteMonsterDialog } from "@/components/delete-monster-dialog";
 import { MonsterDetailDialog } from "@/components/monster-detail-dialog";
 import { useState, useEffect } from 'react';
-import { Plus } from "lucide-react";
+import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -30,8 +30,70 @@ const initialMonsters: Monster[] = [
         name: "Dragon",
         photo: "https://picsum.photos/200/300",
         description: "A large, fire-breathing reptile."
-    }
+    },
+  {
+    id: "3",
+    name: "Ogre",
+    photo: "https://picsum.photos/200/300",
+    description: "A big and ugly creature."
+  },
+  {
+    id: "4",
+    name: "Troll",
+    photo: "https://picsum.photos/200/300",
+    description: "A very big and ugly creature."
+  },
+  {
+    id: "5",
+    name: "Sprite",
+    photo: "https://picsum.photos/200/300",
+    description: "A small fairy."
+  },
+  {
+    id: "6",
+    name: "Gorgon",
+    photo: "https://picsum.photos/200/300",
+    description: "A snake-haired monster."
+  },
+  {
+    id: "7",
+    name: "Centaur",
+    photo: "https://picsum.photos/200/300",
+    description: "A half-man, half-horse creature."
+  },
+  {
+    id: "8",
+    name: "Harpy",
+    photo: "https://picsum.photos/200/300",
+    description: "A bird-woman creature."
+  },
+  {
+    id: "9",
+    name: "Phoenix",
+    photo: "https://picsum.photos/200/300",
+    description: "A fire bird creature."
+  },
+  {
+    id: "10",
+    name: "Basilisk",
+    photo: "https://picsum.photos/200/300",
+    description: "A snake creature."
+  },
+  {
+    id: "11",
+    name: "Hydra",
+    photo: "https://picsum.photos/200/300",
+    description: "A multi-headed serpent."
+  },
+  {
+    id: "12",
+    name: "Cerberus",
+    photo: "https://picsum.photos/200/300",
+    description: "A multi-headed dog."
+  }
 ];
+
+const PAGE_SIZE = 8;
 
 export default function Home() {
     const [monsters, setMonsters] = useState<Monster[]>([]);
@@ -42,6 +104,18 @@ export default function Home() {
     const [monsterDetailOpen, setMonsterDetailOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredMonsters, setFilteredMonsters] = useState<Monster[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const totalPages = Math.ceil(filteredMonsters.length / PAGE_SIZE);
+
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+    };
+
+    const pagedMonsters = filteredMonsters.slice(
+        (currentPage - 1) * PAGE_SIZE,
+        currentPage * PAGE_SIZE
+    );
 
 
     useEffect(() => {
@@ -66,6 +140,7 @@ export default function Home() {
             monster.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredMonsters(results);
+        setCurrentPage(1); // Reset to first page on search
     }, [searchTerm, monsters]);
 
 
@@ -115,7 +190,7 @@ export default function Home() {
             />
 
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {filteredMonsters.map((monster) => (
+                {pagedMonsters.map((monster) => (
                     <Card
                         key={monster.id}
                         className="hover:shadow-md transition-shadow duration-200"
@@ -169,6 +244,29 @@ export default function Home() {
                 ))}
             </div>
 
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <div className="flex justify-center items-center mt-4 gap-2">
+                    <Button
+                        size="sm"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        <ChevronLeft className="mr-2 h-4 w-4" />
+                        Previous
+                    </Button>
+                    <span>{currentPage} / {totalPages}</span>
+                    <Button
+                        size="sm"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                        <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
+            )}
+
             <AddMonsterDialog
                 open={addMonsterOpen}
                 onOpenChange={setAddMonsterOpen}
@@ -203,4 +301,3 @@ export default function Home() {
         </div>
     );
 }
-
